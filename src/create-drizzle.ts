@@ -1,5 +1,5 @@
 import postgres from 'postgres'
-import * as schema from './schema/index.js'
+import * as schema from './schema'
 
 export type Schema = typeof schema
 
