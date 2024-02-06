@@ -4,15 +4,16 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from '@azure/functions'
-import { createDrizzle } from '../create-drizzle.js'
-import { UserInsert, users } from '../schema/index.js'
+import { createDrizzle } from '../create-drizzle'
+import { UserInsert, users } from '../schema'
 import { eq } from 'drizzle-orm'
-import { resend, vueEmail } from '../mailer.js'
+import { resend, vueEmail } from '../mailer'
 
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
 
 // TODO: validate incoming data using TypeBox/Zod
 // TODO: success/error message builder
+// TODO: check for success on email sending
 export async function handleBuapPreRegister(
   request: HttpRequest,
   context: InvocationContext
@@ -27,7 +28,7 @@ export async function handleBuapPreRegister(
 
   if (existingUser) {
     return {
-      status: 409,
+      status: 410,
       jsonBody: { success: false, error: 'User already exists' },
     }
   }
