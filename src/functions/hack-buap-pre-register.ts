@@ -4,9 +4,10 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from '@azure/functions'
-import { createDrizzle } from '../create-drizzle'
-import { UserInsert, users } from '../schema'
+import { createDrizzle } from '../create-drizzle.js'
+import { UserInsert, users } from '../schema/index.js'
 import { eq } from 'drizzle-orm'
+import { resend, vueEmail } from '../mailer.js'
 
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
 
@@ -19,8 +20,6 @@ export async function handleBuapPreRegister(
   const db = await createDB
 
   const userData = (await request.json()) as unknown as UserInsert
-
-  console.log(userData)
 
   const existingUser = await db.query.users.findFirst({
     where: eq(users.email, userData.email),
@@ -41,6 +40,19 @@ export async function handleBuapPreRegister(
       jsonBody: { success: false, error: 'Database error' },
     }
   }
+
+  const emailTemplate = await vueEmail.render('PreRegistration.vue')
+
+  const options: Parameters<typeof resend.emails.send>[0] = {
+    from: 'onboarding@resend.dev',
+    to: 'jolliness_cloud175@simplelogin.com',
+    subject: 'This is a test',
+    html: emailTemplate.html,
+  }
+
+  const emailSent = await resend.emails.send(options)
+
+  console.log(emailSent)
 
   return { jsonBody: { success: true, message: 'User registered' } }
 }
