@@ -1,15 +1,15 @@
 {
   "compilerOptions": {
-    "module": "Node16",
-    "target": "ES6",
+    "module": "esnext",
+    "target": "es2018",
+    "lib": ["esnext"],
     "outDir": "dist",
     "rootDir": ".",
     "sourceMap": true,
     "strict": false,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "moduleResolution": "Node16",
+    "moduleResolution": "Node",
   },
-  "include": ["src/**/*"],
-  "exclude": ["src/email/playground/*/**"]
+  "exclude": ["src/email/playground"]
 }
