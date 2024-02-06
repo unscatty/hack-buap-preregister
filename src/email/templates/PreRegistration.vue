@@ -1,27 +1,38 @@
 <script setup lang="ts">
-import { ETailwind, EHead, EBody, ESection, EContainer, EHtml, EPreview, EHeading, EText, ELink, EButton, EColumn, ERow, EImg, EHr } from 'vue-email'
+import {
+  ETailwind,
+  EHead,
+  EBody,
+  ESection,
+  EContainer,
+  EHtml,
+  EPreview,
+  EHeading,
+  EText,
+  ELink,
+  EButton,
+  EColumn,
+  ERow,
+  EImg,
+  EHr,
+} from 'vue-email'
 import { withDefaults } from 'vue'
 
 interface Props {
-  invitedByUsername?: string
-  teamName?: string
   username?: string
-  invitedByEmail?: string
   inviteLink?: string
   inviteFromIp?: string
   inviteFromLocation?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  teamName: 'My project',
-  username: 'John asds',
-  invitedByEmail: 'anpch@example.com',
+  username: 'John Doe',
   inviteLink: 'https://vercel.com/teams/invite/foo',
   inviteFromIp: '172.0.0.1',
   inviteFromLocation: 'San Francisco, CA',
 })
 
-const previewText = `Join ${props.invitedByUsername} on Vercel`
+const previewText = `${props.username}, ¡Ya estás dentro!`
 </script>
 
 <template>
@@ -35,62 +46,40 @@ const previewText = `Join ${props.invitedByUsername} on Vercel`
         >
           <ESection class="mt-[32px]">
             <EImg
-              src="https://vue-email-demo.vercel.app/static/vercel-logo.png"
+              src="https://about.gitlab.com/images/opengraph/hackathon-generic-card.png"
+              width="640"
+              height="360"
+              alt="Hackathon banner"
+              class="my-0 mx-auto"
+            />
+            <EImg
+              src="https://www.pngitem.com/pimgs/m/95-958227_blue-gray-wolf-drawing-logo-free-download-png.png"
               width="40"
               height="37"
-              alt="Vercel"
+              alt="Lobo"
               class="my-0 mx-auto"
             />
           </ESection>
-          Hello {{ username }}
-          <div v-pre>{{ holaaa }}</div>
           <EHeading
             class="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0"
           >
-            Join <strong>{{ teamName }}</strong> on <strong>Vercel</strong>
+            <strong>¡Ya estás dentro!</strong>
           </EHeading>
           <EText class="text-black text-[14px] leading-[24px]">
-            Hello {{ username }},
+            Hola <strong>{{ username }} </strong>,
           </EText>
           <EText class="text-black text-[14px] leading-[24px]">
-            <strong>bukinoshita</strong> (
-            <ELink
-              :href="`mailto:${invitedByEmail}`"
-              class="text-blue-600 no-underline"
-            >
-              {{ invitedByEmail }}
-            </ELink>
-            ) has invited you to the <strong>{{ teamName }}</strong> team on
-            <strong>Vercel</strong>.
+            ¡Gracias por registrarte para la primer edición del
+            <strong>Lobo Hackathon Buap 2024!</strong>
+            <br />
+            <br />
+            Zombie ipsum reversus ab viral inferno, nam rick grimes malum
+            cerebro. De carne lumbering animata corpora quaeritis. Summus brains
+            sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
+            survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo
+            evil stalking monstra adventus resi dentevil vultus comedat
+            cerebella viventium. Qui animated corpse.
           </EText>
-          <ESection>
-            <ERow>
-              <EColumn align="right">
-                <EImg
-                  class="rounded-full"
-                  src="https://vue-email-demo.vercel.app/static/vercel-user.png"
-                  width="64"
-                  height="64"
-                />
-              </EColumn>
-              <EColumn align="center">
-                <EImg
-                  src="https://vue-email-demo.vercel.app/static/vercel-arrow.png"
-                  width="12"
-                  height="9"
-                  alt="invited you to"
-                />
-              </EColumn>
-              <EColumn align="left">
-                <EImg
-                  class="rounded-full"
-                  src="https://vue-email-demo.vercel.app/static/vercel-team.png"
-                  width="64"
-                  height="64"
-                />
-              </EColumn>
-            </ERow>
-          </ESection>
           <ESection class="text-center mt-[32px] mb-[32px]">
             <EButton
               px="20"
@@ -98,11 +87,11 @@ const previewText = `Join ${props.invitedByUsername} on Vercel`
               class="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
               :href="inviteLink"
             >
-              Join the team
+              Confirmar correo electrónico
             </EButton>
           </ESection>
           <EText class="text-black text-[14px] leading-[24px]">
-            or copy and paste this URL into your browser:
+            o copia y pega el siguiente enlace en tu navegador:
             <ELink :href="inviteLink" class="text-blue-600 no-underline">
               {{ inviteLink }}
             </ELink>
