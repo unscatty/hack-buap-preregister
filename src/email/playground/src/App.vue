@@ -8,33 +8,29 @@ const email = ref('')
 
 
 const data = {
-  invitedByUsername: 'bukinoshita',
-  teamName: 'My project',
-  username: 'John asds',
-  invitedByEmail: 'email',
-  inviteLin: 'https://vercel.com/teams/invite/foo',
+  username: 'Carlos',
+  inviteLink: 'https://vercel.com/teams/invite/foo',
   inviteFromIp: '127.0.0.1',
-  inviteFromLocation: 'San Francisco, CA',
+  inviteFromLocation: 'Puebla, Pue.',
 }
 
-onMounted(async () => {
-  const result = await useRender(
-    EmailTemplate,
-    { props: data },
-    {
-      pretty: true,
-    }
-  )
+// onMounted(async () => {
+//   const result = await useRender(
+//     EmailTemplate,
+//     { props: data },
+//     {
+//       pretty: true,
+//     }
+//   )
 
-  email.value = result.html
+//   email.value = result.html
 
-  console.log(result.html)
-})
-
+//   console.log(result.html)
+// })
 </script>
 
 <template>
-  <iframe :srcdoc="email"></iframe>
+  <!-- <iframe :srcdoc="email"></iframe> -->
   <Suspense>
     <EmailTemplate v-bind="data" />
   </Suspense>
