@@ -28,7 +28,7 @@ export async function handleBuapPreRegister(
 
   if (existingUser) {
     return {
-      status: 410,
+      status: 409,
       jsonBody: { success: false, error: 'User already exists' },
     }
   }
