@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
+  "packageManager": "pnpm@8.15.1",
   "scripts": {
-    "build": "tsc",
+    "build": "unbuild",
+    "stub": "unbuild --stub",
     "play": "cd src/email/playground && npm run dev -- --port 3000",
-    "watch": "tsc -w",
     "clean": "rimraf dist",
-    "prestart": "npm run clean && npm run build",
     "start": "func start",
     "test": "echo \"No tests yet...\""
   },
@@ -24,7 +24,8 @@
     "@types/node": "^18.19.14",
     "drizzle-kit": "^0.20.14",
     "rimraf": "^5.0.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "unbuild": "^2.0.0"
   },
-  "main": "dist/src/functions/*.js"
+  "main": "dist/src/functions/*.mjs"
 }
