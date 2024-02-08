@@ -12,13 +12,21 @@ const email = '{% it.email %}'
         <EContainer
           class="border border-solid border-[#eaeaea] p-[20px] md:p-7 rounded my-[40px] mx-auto max-w-[465px]"
         >
-          <ESection class="mt-[32px]">
+        <!-- <a href="https://ibb.co/4T6f71W"><img src="https://i.ibb.co/ncH0bPr/pattern-pentan.png" alt="pattern-pentan" border="0"></a> -->
+          <ESection class="m-[0px_auto] w-[680px] h-[800px] bg-[#024873] bg-[url('https://i.ibb.co/ncH0bPr/pattern-pentan.png')] bg-no-repeat [background-position:right_bottom]">
+            <EText
+              class="text-white text-[32px] leading-[40px] text-center m-8 font-mono"
+            >
+              {{ username }},
+              <br />
+              <strong>¡Ya estás dentro!</strong>
+            </EText>
             <EImg
-              src="https://about.gitlab.com/images/opengraph/hackathon-generic-card.png"
+              src="https://i.ibb.co/sK2rfDg/Picsart-24-02-06-20-33-48-475.png"
               width="640"
               height="360"
               alt="Hackathon banner"
-              class="my-0 mx-auto"
+              class="my-0 mx-auto object-contain"
             />
             <EImg
               src="https://www.pngitem.com/pimgs/m/95-958227_blue-gray-wolf-drawing-logo-free-download-png.png"
