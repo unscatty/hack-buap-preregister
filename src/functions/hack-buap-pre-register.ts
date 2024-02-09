@@ -9,7 +9,7 @@ import { UserInsert, users } from '../schema'
 import { eq } from 'drizzle-orm'
 import { resend, vueEmail } from '../mailer'
 
-const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
+const createDB = () => createDrizzle(process.env['DatabaseConnectionString']!)
 
 // TODO: validate incoming data using TypeBox/Zod
 // TODO: success/error message builder
@@ -18,7 +18,7 @@ export async function handleBuapPreRegister(
   request: HttpRequest,
   context: InvocationContext
 ): Promise<HttpResponseInit> {
-  const db = await createDB
+  const db = await createDB()
 
   const userData = (await request.json()) as unknown as UserInsert
 
@@ -45,9 +45,9 @@ export async function handleBuapPreRegister(
   const emailTemplate = await vueEmail.render('PreRegistration.vue')
 
   const options: Parameters<typeof resend.emails.send>[0] = {
-    from: 'onboarding@resend.dev',
+    from: 'hackathon.buap@resend.dev',
     to: 'jolliness_cloud175@simplelogin.com',
-    subject: 'This is a test',
+    subject: 'Pre-registro Lobo Hackathon BUAP 2024',
     html: emailTemplate.html,
   }
 
