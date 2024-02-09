@@ -7,7 +7,8 @@ import {
 import { createDrizzle } from '../create-drizzle'
 import { UserInsert, users } from '../schema'
 import { eq } from 'drizzle-orm'
-import { resend, vueEmail } from '../mailer'
+import { resend } from '../email/resend-mailer'
+import { vueEmail } from '../email/vue-email.config'
 
 const createDB = () => createDrizzle(process.env['DatabaseConnectionString']!)
 
