@@ -4,14 +4,14 @@ import {
   HttpResponseInit,
   InvocationContext,
 } from '@azure/functions'
-import { createDrizzle } from '../create-drizzle'
-import { UserInsert, users } from '../schema'
 import { eq } from 'drizzle-orm'
+import { createDrizzle } from '../create-drizzle'
 import { resend, vueEmail } from '../mailer'
+import { UserInsert, users, validateUserInsert } from '../schema'
+import { formValidationErrors } from '../utils/form-validation-errors'
 
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
 
-// TODO: validate incoming data using TypeBox/Zod
 // TODO: success/error message builder
 // TODO: check for success on email sending
 export async function handleBuapPreRegister(
@@ -20,7 +20,22 @@ export async function handleBuapPreRegister(
 ): Promise<HttpResponseInit> {
   const db = await createDB
 
-  const userData = (await request.json()) as unknown as UserInsert
+  const userData = (await request.json()) as UserInsert
+
+  const isValidUser = validateUserInsert.test(userData)
+
+  if (!isValidUser) {
+    const formErrors = formValidationErrors(validateUserInsert.errors(userData))
+
+    return {
+      status: 400,
+      jsonBody: {
+        success: false,
+        error: 'Invalid user data',
+        formErrors: formErrors,
+      },
+    }
+  }
 
   const existingUser = await db.query.users.findFirst({
     where: eq(users.email, userData.email),

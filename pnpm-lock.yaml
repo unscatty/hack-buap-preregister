@@ -8,18 +8,27 @@ dependencies:
   '@azure/functions':
     specifier: ^4.2.0
     version: 4.2.0
+  '@sinclair/typebox':
+    specifier: ^0.32.13
+    version: 0.32.13
   '@vue-email/compiler':
     specifier: ^0.8.10
     version: 0.8.10(typescript@5.3.3)(vue@3.4.15)
   drizzle-orm:
     specifier: ^0.29.3
     version: 0.29.3(postgres@3.4.3)(react@18.2.0)
+  drizzle-typebox:
+    specifier: ^0.1.1
+    version: 0.1.1(@sinclair/typebox@0.32.13)(drizzle-orm@0.29.3)
   postgres:
     specifier: ^3.4.3
     version: 3.4.3
   resend:
     specifier: ^3.1.0
     version: 3.1.0
+  typebox-validators:
+    specifier: ^0.3.5
+    version: 0.3.5(@sinclair/typebox@0.32.13)
 
 devDependencies:
   '@types/node':
@@ -899,6 +908,10 @@ packages:
     resolution: {integrity: sha512-z3gdznaRj/DJSLQdR2Gdx6AB3e5+Il/kSGdLTGHI7HnalgPL15RbGgBSdLHW8rKAz4+dezAcTdnxm8z6YTu7nA==}
     dev: false
 
+  /@sinclair/typebox@0.32.13:
+    resolution: {integrity: sha512-6gfhrgov2RWxPIlGyFcCVn1DejhmQvObIiBIx/Qx3FRnxlLS/RuoyDxK1hhhVU+S5+1Xmul32QALLErVfinyxw==}
+    dev: false
+
   /@swc/wasm@1.4.0:
     resolution: {integrity: sha512-7O27J0FV0uB/EHqGCSuusPNVS7oO5S03eENFJvvRb4ojOWny6/MuErkkgZZlV34/3WhfPVfxX+O6ijTEALePJA==}
     dev: false
@@ -1650,6 +1663,16 @@ packages:
     dependencies:
       postgres: 3.4.3
       react: 18.2.0
+    dev: false
+
+  /drizzle-typebox@0.1.1(@sinclair/typebox@0.32.13)(drizzle-orm@0.29.3):
+    resolution: {integrity: sha512-eNIDe+EOCB96/bbRHOPbrC+bsuCXFd2H0/96Fl0cJkY+NKnu2qLTnGI6ILXPbyu82Yr1tsShlzDypw+VeCDqaQ==}
+    peerDependencies:
+      '@sinclair/typebox': '>=0.17.6'
+      drizzle-orm: '>=0.23.13'
+    dependencies:
+      '@sinclair/typebox': 0.32.13
+      drizzle-orm: 0.29.3(postgres@3.4.3)(react@18.2.0)
     dev: false
 
   /eastasianwidth@0.2.0:
@@ -3520,6 +3543,14 @@ packages:
   /type@2.7.2:
     resolution: {integrity: sha512-dzlvlNlt6AXU7EBSfpAscydQ7gXB+pPGsPnfJnZpiNJBDj7IaJzQlBZYGdEi4R9HmPdBv2XmWJ6YUtoTa7lmCw==}
     dev: true
+
+  /typebox-validators@0.3.5(@sinclair/typebox@0.32.13):
+    resolution: {integrity: sha512-FXrmSUAN6bSGxDANResNCZQ8VRRLr5bSyy73/HyqSXGdiVuogppGAoRocy7NTVZY4Wc2sWUofmWwwIXE6OxS6Q==}
+    peerDependencies:
+      '@sinclair/typebox': ^0.30.4
+    dependencies:
+      '@sinclair/typebox': 0.32.13
+    dev: false
 
   /typescript@5.3.3:
     resolution: {integrity: sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==}
