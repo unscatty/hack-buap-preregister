@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ETailwind, EHead, EBody, ESection, EContainer, EHtml, EPreview, EHeading, EText, ELink, EButton, EColumn, ERow, EImg, EHr } from 'vue-email'
 import { withDefaults } from 'vue'
 
 interface Props {
