@@ -1,8 +1,7 @@
 {
-  "name": "mailer-function",
+  "name": "hack-buap-preregister",
   "version": "1.0.0",
   "description": "",
-  "type": "module",
   "packageManager": "pnpm@8.15.1",
   "scripts": {
     "build": "unbuild",
@@ -29,5 +28,5 @@
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0"
   },
-  "main": "dist/src/functions/*.mjs"
+  "main": "dist/src/functions/*.js"
 }
