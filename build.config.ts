@@ -11,7 +11,7 @@ export default defineBuildConfig({
       distDir: './dist/src',
       rootDir: '.',
       srcDir: './src',
-      pattern: ['**/*.{ts,vue}', '!**/email/playground/**'],
+      pattern: ['**/*.ts', '!**/email/playground/**'],
       declaration: true,
     },
   ],

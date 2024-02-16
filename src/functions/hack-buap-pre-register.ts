@@ -10,6 +10,9 @@ import { resend, vueEmail } from '../mailer'
 import { UserInsert, users, validateUserInsert } from '../schema'
 import { formValidationErrors } from '../utils/form-validation-errors'
 
+import * as Sqrl from 'squirrelly'
+import PreRegistration from '../email/compiled/PreRegistration'
+
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
 
 // TODO: success/error message builder
@@ -57,13 +60,21 @@ export async function handleBuapPreRegister(
     }
   }
 
-  const emailTemplate = await vueEmail.render('PreRegistration.vue')
+  // const emailTemplate = await vueEmail.render('PreRegistration.vue')
+  const htmlEmail: string = Sqrl.render(
+    PreRegistration,
+    {
+      name: 'Test Name',
+      email: 'Test Email'
+    },
+    { tags: ['{%', '%}'] }
+  )
 
   const options: Parameters<typeof resend.emails.send>[0] = {
     from: 'onboarding@resend.dev',
     to: 'jolliness_cloud175@simplelogin.com',
     subject: 'This is a test',
-    html: emailTemplate.html,
+    html: htmlEmail,
   }
 
   const emailSent = await resend.emails.send(options)

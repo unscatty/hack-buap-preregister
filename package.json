@@ -4,9 +4,13 @@
   "description": "",
   "packageManager": "npm@9.8.1",
   "scripts": {
-    "build": "unbuild",
+    "build": "npm run compile-emails && unbuild && npm run clean-compiled-emails",
     "stub": "unbuild --stub",
     "play": "cd src/email/playground && npm run dev -- --port 3000",
+    "compile-emails-to-html": "vue-email export --dir ./src/email/templates --out ./src/email/compiled/html --pretty false",
+    "compile-html-emails-to-js": "node scripts/html-to-js-string.mjs './src/email/compiled/html/*.html' './src/email/compiled/'",
+    "compile-emails": "npm run compile-emails-to-html && npm run compile-html-emails-to-js",
+    "clean-compiled-emails": "rimraf src/email/compiled",
     "clean": "rimraf dist",
     "start": "func start",
     "test": "echo \"No tests yet...\""
@@ -14,16 +18,19 @@
   "dependencies": {
     "@azure/functions": "^4.2.0",
     "@sinclair/typebox": "^0.32.13",
-    "@vue-email/compiler": "^0.8.10",
+    "@vue-email/compiler": "^0.8.11",
     "drizzle-orm": "^0.29.3",
     "drizzle-typebox": "^0.1.1",
     "postgres": "^3.4.3",
     "resend": "^3.1.0",
+    "squirrelly": "^9.0.0",
     "typebox-validators": "^0.3.5"
   },
   "devDependencies": {
     "@types/node": "^18.19.14",
     "drizzle-kit": "^0.20.14",
+    "fast-glob": "^3.3.2",
+    "fs-extra": "^11.2.0",
     "rimraf": "^5.0.5",
     "typescript": "^5.3.3",
     "unbuild": "^2.0.0"
