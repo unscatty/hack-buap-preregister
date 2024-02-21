@@ -63,10 +63,7 @@ export async function handleBuapPreRegister(
   // const emailTemplate = await vueEmail.render('PreRegistration.vue')
   const htmlEmail: string = Sqrl.render(
     PreRegistration,
-    {
-      name: 'Test Name',
-      email: 'Test Email'
-    },
+    userData,
     { tags: ['{%', '%}'] }
   )
 
