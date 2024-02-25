@@ -1,5 +1,5 @@
 <script setup>
-const name = '{% it.name %}'
+const name = '{% it.firstName %} {% it.lastName %}'
 const email = '{% it.email %}'
 </script>
 
