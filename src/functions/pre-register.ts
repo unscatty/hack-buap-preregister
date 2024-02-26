@@ -34,7 +34,7 @@ export async function handleBuapPreRegister(
       status: 400,
       jsonBody: {
         success: false,
-        error: 'Invalid user data',
+        error: 'invalidFormData',
         formErrors: formErrors,
       },
     }
@@ -47,7 +47,7 @@ export async function handleBuapPreRegister(
   if (existingUser) {
     return {
       status: 409,
-      jsonBody: { success: false, error: 'User already exists' },
+      jsonBody: { success: false, error: 'userAlreadyExists' },
     }
   }
 
@@ -56,7 +56,7 @@ export async function handleBuapPreRegister(
   } catch {
     return {
       status: 500,
-      jsonBody: { success: false, error: 'Database error' },
+      jsonBody: { success: false, error: 'databaseError' },
     }
   }
 
@@ -78,10 +78,10 @@ export async function handleBuapPreRegister(
 
   console.log(emailSent)
 
-  return { jsonBody: { success: true, message: 'User registered' } }
+  return { jsonBody: { success: true, message: 'userRegistered' } }
 }
 
-app.http('hack-buap-pre-register', {
+app.http('pre-register', {
   methods: ['POST'],
   authLevel: 'anonymous',
   handler: handleBuapPreRegister,
