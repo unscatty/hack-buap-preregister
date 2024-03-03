@@ -6,12 +6,15 @@ import {
 } from '@azure/functions'
 import { eq } from 'drizzle-orm'
 import { createDrizzle } from '../create-drizzle'
-import { resend, vueEmail } from '../mailer'
+import { sendgridMail } from '../mailer'
 import { UserInsert, users, validateUserInsert } from '../schema'
 import { formValidationErrors } from '../utils/form-validation-errors'
 
 import * as Sqrl from 'squirrelly'
 import PreRegistration from '../email/compiled/PreRegistration'
+
+const fromAddress = process.env['MailerInfoFrom']!
+const subjectTemplate = process.env['MailerInfoSubject']!
 
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
 
@@ -61,22 +64,27 @@ export async function handleBuapPreRegister(
   }
 
   // const emailTemplate = await vueEmail.render('PreRegistration.vue')
-  const htmlEmail: string = Sqrl.render(
-    PreRegistration,
-    userData,
-    { tags: ['{%', '%}'] }
-  )
+  const htmlEmail: string = Sqrl.render(PreRegistration, userData, {
+    tags: ['{%', '%}'],
+  })
 
-  const options: Parameters<typeof resend.emails.send>[0] = {
-    from: 'onboarding@resend.dev',
-    to: 'jolliness_cloud175@simplelogin.com',
-    subject: 'This is a test',
+  const subject = Sqrl.render(subjectTemplate, userData)
+
+  const options: Parameters<(typeof sendgridMail)['send']>[0] = {
+    from: fromAddress,
+    to: userData.email,
+    subject,
     html: htmlEmail,
   }
 
-  const emailSent = await resend.emails.send(options)
-
-  console.log(emailSent)
+  try {
+    const emailSent = await sendgridMail.send(options)
+  } catch (e) {
+    return {
+      status: 500,
+      jsonBody: { success: false, error: 'emailError' },
+    }
+  }
 
   return { jsonBody: { success: true, message: 'userRegistered' } }
 }

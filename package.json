@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@azure/functions": "^4.2.0",
+    "@sendgrid/mail": "^8.1.1",
     "@sinclair/typebox": "^0.32.13",
     "@vue-email/compiler": "^0.8.11",
     "drizzle-orm": "^0.29.3",
