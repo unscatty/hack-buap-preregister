@@ -37,6 +37,8 @@ export const users = pgTable('users', {
   whatToExpect: text('what_to_expect').notNull(),
   firstTimer: boolean('first_timer').notNull().default(true),
   heardFrom: userHeardFromEnum('heard_from').notNull().default('OTHER'),
+  mailSentSuccess: boolean('mail_sent_success').default(false),
+  mailSentAt: timestamp('mail_sent_at'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })

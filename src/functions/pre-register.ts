@@ -6,7 +6,13 @@ import {
 } from '@azure/functions'
 import { eq } from 'drizzle-orm'
 import { createDrizzle } from '../create-drizzle'
-import { sendgridMail } from '../mailer'
+import {
+  chooseMailer,
+  Mailer,
+  MailerSendOptions,
+  resendMailer,
+  sendgridMailer,
+} from '../mailer'
 import { UserInsert, users, validateUserInsert } from '../schema'
 import { formValidationErrors } from '../utils/form-validation-errors'
 
@@ -17,6 +23,14 @@ const fromAddress = process.env['MailerInfoFrom']!
 const subjectTemplate = process.env['MailerInfoSubject']!
 
 const createDB = createDrizzle(process.env['DatabaseConnectionString']!)
+
+const mailer: Mailer = process.env['Mailer']
+  ? chooseMailer(process.env['Mailer'])
+  : process.env.NODE_ENV === 'production'
+  ? sendgridMailer
+  : resendMailer
+
+console.log(`\x1b[32m\x1b[40m Using mailer: ${mailer.name} \x1b[0m`)
 
 // TODO: success/error message builder
 // TODO: check for success on email sending
@@ -70,7 +84,7 @@ export async function handleBuapPreRegister(
 
   const subject = Sqrl.render(subjectTemplate, userData)
 
-  const options: Parameters<(typeof sendgridMail)['send']>[0] = {
+  const options: MailerSendOptions = {
     from: fromAddress,
     to: userData.email,
     subject,
@@ -78,8 +92,25 @@ export async function handleBuapPreRegister(
   }
 
   try {
-    const emailSent = await sendgridMail.send(options)
+    const emailSent = await mailer.send(options)
+
+    await db
+      .update(users)
+      .set({ mailSentSuccess: true, mailSentAt: new Date() })
+      .where(eq(users.email, userData.email))
   } catch (e) {
+    try {
+      await db
+        .update(users)
+        .set({ mailSentSuccess: false })
+        .where(eq(users.email, userData.email))
+    } catch {
+      return {
+        status: 500,
+        jsonBody: { success: false, error: 'databaseError' },
+      }
+    }
+
     return {
       status: 500,
       jsonBody: { success: false, error: 'emailError' },
