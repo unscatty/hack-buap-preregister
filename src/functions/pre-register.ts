@@ -107,7 +107,7 @@ export async function handleBuapPreRegister(
     } catch {
       return {
         status: 500,
-        jsonBody: { success: false, error: 'databaseError' },
+        jsonBody: { success: false, error: 'databaseError', kind: 'warn' },
       }
     }
 
