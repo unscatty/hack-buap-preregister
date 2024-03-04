@@ -1,89 +1,183 @@
 <script setup>
-const name = '{% it.firstName %} {% it.lastName %}'
+const fullName = '{% it.firstName %} {% it.lastName %}'
 const email = '{% it.email %}'
+const links = [
+  {
+    name: 'Instagram',
+    imgSrc:
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/instagram.png?sp=r&st=2024-03-04T06:58:50Z&se=2024-06-01T14:58:50Z&sv=2022-11-02&sr=b&sig=LN%2B3NRr%2BQUfyNnxa3pNCrf8UMyUVjo%2FQC1Mq9RAEJVM%3D',
+    url: 'https://www.instagram.com/lobohackathon/',
+  },
+  {
+    name: 'TikTok',
+    imgSrc:
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/tiktok.png?sp=r&st=2024-03-04T06:59:33Z&se=2024-06-01T14:59:33Z&sv=2022-11-02&sr=b&sig=t5R0mOUpcrVQbfSWzwym25KOy9lK%2Fsr6WPZZ0JkJfYo%3D',
+    url: 'https://www.tiktok.com/@lobohackathon',
+  },
+  {
+    name: 'Facebook',
+    imgSrc:
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/facebook.png?sp=r&st=2024-03-04T06:58:21Z&se=2024-06-01T14:58:21Z&sv=2022-11-02&sr=b&sig=ZygW8Yn7gWn9VqOzjf%2BUnA3zMyBy5v8mKsQE3VPKwRY%3D',
+    url: 'https://www.facebook.com/lobohackathon/',
+  },
+  {
+    name: 'Discord',
+    imgSrc:
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/discord.png?sp=r&st=2024-03-04T06:56:20Z&se=2024-06-01T14:56:20Z&sv=2022-11-02&sr=b&sig=581tOqb25mn4opYrlGSdRETh6s6xDh7jEEbBDwMNJlU%3D',
+    url: 'https://discord.gg/DnFZNU9h',
+  },
+]
 </script>
 
 <template>
   <ETailwind>
     <EHtml>
       <EHead />
-      <EPreview>{{ name }}, ¡Ya estás dentro!</EPreview>
-      <EBody class="bg-white my-auto mx-auto font-sans">
+      <EPreview>{{ fullName }}, ¡Ya estás dentro!</EPreview>
+      <EBody class="bg-[#000] text-white my-auto mx-auto font-sans">
         <EContainer
-          class="border border-solid border-[#eaeaea] p-[20px] md:p-7 rounded my-[40px] mx-auto max-w-[465px]"
+          class="border border-solid text-[#fff] bg-[#000] border-[#eaeaea] pt-[20px] md:p-7 rounded mt-[40px] mb-[0px] mx-auto max-w-[465px]"
         >
-        <!-- <a href="https://ibb.co/4T6f71W"><img src="https://i.ibb.co/ncH0bPr/pattern-pentan.png" alt="pattern-pentan" border="0"></a> -->
-          <ESection class="m-[0px_auto] w-[680px] h-[800px] bg-[#024873] bg-[url('https://i.ibb.co/ncH0bPr/pattern-pentan.png')] bg-no-repeat [background-position:right_bottom]">
-            <EText
-              class="text-white text-[32px] leading-[40px] text-center m-8 font-mono"
-            >
-              {{ username }},
+          <!-- <a href="https://ibb.co/4T6f71W"><img src="https://i.ibb.co/ncH0bPr/pattern-pentan.png" alt="pattern-pentan" border="0"></a> -->
+          <ESection
+            class="m-[0px_auto] w-[680px] h-[400px] bg-[#024873] bg-[url('https://i.ibb.co/ncH0bPr/pattern-pentan.png')] bg-no-repeat [background-position:right_bottom]"
+          >
+            <EText class="text-[32px] leading-[40px] text-center m-8 font-mono">
+              {{ fullName }},
               <br />
               <strong>¡Ya estás dentro!</strong>
             </EText>
             <EImg
-              src="https://i.ibb.co/sK2rfDg/Picsart-24-02-06-20-33-48-475.png"
+              src="https://hackathonbuapbb54.blob.core.windows.net/hack-assets/lobo_personaje.png?sp=r&st=2024-03-03T22:45:14Z&se=2024-06-01T06:45:14Z&sv=2022-11-02&sr=b&sig=0s4yv3yEzalj5j3wIU9%2FHqM%2FDV09LQbMrGleS8nFqPM%3D"
               width="640"
               height="360"
               alt="Hackathon banner"
-              class="my-0 mx-auto object-contain"
+              class="mx-auto object-contain mb-[10px]"
             />
-            <EImg
+            <!-- <EImg
               src="https://www.pngitem.com/pimgs/m/95-958227_blue-gray-wolf-drawing-logo-free-download-png.png"
               width="40"
               height="37"
               alt="Lobo"
               class="my-0 mx-auto"
-            />
+            /> -->
           </ESection>
           <EHeading
-            class="text-black text-[24px] font-normal text-center p-0 my-[30px] mx-0"
+            class="text-[24px] font-normal text-center p-0 my-[30px] mx-0"
           >
             <strong>¡Ya estás dentro!</strong>
           </EHeading>
-          <EText class="text-black text-[14px] leading-[24px]">
-            Hola <strong>{{ username }} </strong>,
+          <EText class="text-[18px] leading-[24px] pb-[32px]">
+            Hola <strong>{{ fullName }} </strong>,
           </EText>
-          <EText class="text-black text-[14px] leading-[24px]">
+          <EText class="text-[16px] leading-[28px]">
             ¡Gracias por registrarte para la primer edición del
             <strong>Lobo Hackathon Buap 2024!</strong>
-            <br />
-            <br />
-            Zombie ipsum reversus ab viral inferno, nam rick grimes malum
-            cerebro. De carne lumbering animata corpora quaeritis. Summus brains
-            sit​​, morbo vel maleficia? De apocalypsi gorger omero undead
-            survivor dictum mauris. Hi mindless mortuis soulless creaturas, imo
-            evil stalking monstra adventus resi dentevil vultus comedat
-            cerebella viventium. Qui animated corpse.
           </EText>
-          <ESection class="text-center mt-[32px] mb-[32px]">
-            <EButton
-              px="20"
-              py="12"
-              class="bg-[#000000] rounded text-white text-[12px] font-semibold no-underline text-center"
-              :href="email"
-            >
-              Confirmar correo electrónico
-            </EButton>
+          <EText class="text-[14px] leading-[24px]">
+            Nos alegra mucho contar contigo para nuestra primer edición del
+            hackathon. ¡Estamos ansiosos por ver tu talento en acción y
+            compartir juntos una experiencia llena de innovación y aprendizaje!
+          </EText>
+          <EText class="text-[14px] leading-[24px]">
+            En los próximos días, recibirás más detalles sobre el evento,
+            incluyendo información sobre los desafíos, horarios y recursos que
+            te ayudarán a prepararte para la competencia, así como las fechas de
+            registro.
+          </EText>
+          <EText class="text-[14px] leading-[24px]">
+            No olvides seguirnos en nuestras redes sociales para estar al tanto
+            de todas las novedades y participar en conversaciones con otros
+            participantes y mentores. Si tienes alguna pregunta o necesitas
+            ayuda, no dudes en ponerte en contacto con nuestro equipo
+            organizador en cualquier momento. Estamos aquí para apoyarte en tu
+            viaje hacia el éxito en el Lobo Hackathon BUAP 2024.
+          </EText>
+          <ESection class="text-center mt-[16px] mb-[16px]">
+            <EText class="text-[24px] leading-[24px] text-center">
+              <strong>¡Nos vemos pronto!</strong>
+            </EText>
           </ESection>
-          <EText class="text-black text-[14px] leading-[24px]">
-            o copia y pega el siguiente enlace en tu navegador:
-            <ELink :href="inviteLink" class="text-blue-600 no-underline">
-              {{ inviteLink }}
-            </ELink>
-          </EText>
+
+          <ESection className="mt-[50px] px-[50px]">
+            <ERow>
+              <EColumn v-for="link in links" :key="link.name">
+                <ELink :href="link.url" class="underline font-bold">
+                  <EImg
+                    :src="link.imgSrc"
+                    width="24"
+                    height="24"
+                    :alt="link.name"
+                    class="my-0 mx-auto"
+                  />
+                </ELink>
+              </EColumn>
+            </ERow>
+          </ESection>
           <EHr
             class="border border-solid border-[#eaeaea] my-[26px] mx-0 w-full"
           />
-          <EText class="text-[#666666] text-[12px] leading-[24px]">
-            This invitation was intended for
-            <span class="text-black">{{ name }}</span
-            >.This invite was sent from <span class="text-black"></span> located
-            in <span class="text-black"></span>. If you were not expecting this
-            invitation, you can ignore this email. If you are concerned about
-            your account's safety, please reply to this email to get in touch
-            with us.
-          </EText>
+          <!-- Diclaimer -->
+          <ESection>
+            <EText class="text-[#bbb8b8] text-[10px] leading-[16px]">
+              ADVERTENCIA DE PRIVACIDAD. La información contenida en este correo
+              se dirige exclusivamente a su destinatario; puede contener
+              INFORMACIÓN CONFIDENCIAL cuya divulgación está prohibida por la
+              ley. Si recibió este mensaje por error, evite su utilización,
+              reproducción, o difusión, debiendo eliminarlo de su computadora o
+              cualquier dispositivo electrónico y comunicarlo inmediatamente por
+              esta vía a su emisor. La información de este correo, así como la
+              contenida en los documentos que se adjuntan, pueden ser objeto de
+              solicitudes de acceso a la información, sin perjuicio de las
+              limitantes legales al derecho de acceso a la información. Puede
+              consultar los avisos de privacidad para el tratamiento de datos
+              personales con diversas finalidades en
+              <ELink href="https://transparencia.buap.mx">
+                https://transparencia.buap.mx
+              </ELink>
+              .
+            </EText>
+            <EText class="text-[#bbb8b8] text-[10px] leading-[16px]">
+              STATEMENT OF CONFIDENTIALITY. The information contained in this
+              email is addressed exclusively to its addressee; may contain
+              CONFIDENTIAL INFORMATION whose disclosure is prohibited by law. If
+              you received this message in error, avoid its use, reproduction or
+              dissemination, and you must delete it from your computer or any
+              electronic device and immediately notify the issuer by this means.
+              The information in this email, as well as that contained in the
+              attached documents, may be subject to requests for access to
+              information, without prejudice to the legal limitations on the
+              right of access to information. You can consult the privacy
+              notices for the processing of personal data for various purposes
+              at
+              <ELink href="https://transparencia.buap.mx">
+                https://transparencia.buap.mx
+              </ELink>
+              .
+            </EText>
+            <EText class="text-[#bbb8b8] text-[10px] leading-[16px]">
+              La información contenida en este correo se dirige exclusivamente a
+              su destinatario; puede contener INFORMACIÓN CONFIDENCIAL cuya
+              divulgación está prohibida por la ley. Si recibió este mensaje por
+              error, evite su utilización, reproducción, o difusión, debiendo
+              eliminarlo de su computadora o cualquier dispositivo electrónico y
+              comunicarlo inmediatamente por esta vía a su emisor.
+            </EText>
+            <EText class="text-[#bbb8b8] text-[10px] leading-[16px]">
+              La información de este correo, así como la contenida en los
+              documentos que se adjuntan, pueden ser objeto de solicitudes de
+              acceso a la información, sin perjuicio de las limitantes legales
+              al derecho de acceso a la información.
+            </EText>
+            <EText class="text-[#bbb8b8] text-[10px] leading-[16px]">
+              Puede consultar los avisos de privacidad para el tratamiento de
+              datos personales con diversas finalidades en
+              <ELink href="https://transparencia.buap.mx">
+                https://transparencia.buap.mx
+              </ELink>
+              .
+            </EText>
+          </ESection>
         </EContainer>
       </EBody>
     </EHtml>
