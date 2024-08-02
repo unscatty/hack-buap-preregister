@@ -1,1 +1,1 @@
-export * from './user'
+export * from './pre-reg-user'

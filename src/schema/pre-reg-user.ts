@@ -12,7 +12,7 @@ import { createSelectSchema } from 'drizzle-typebox'
 import { DiscriminatedUnionValidator } from 'typebox-validators'
 import { EmailRegex } from '../utils/validation-formats'
 
-export const USER_HEARD_FROM_OPTIONS = [
+export const PRE_REG_USER_HEARD_FROM_OPTIONS = [
   'FROM_A_FRIEND',
   'INSTAGRAM',
   'FACEBOOK',
@@ -21,11 +21,11 @@ export const USER_HEARD_FROM_OPTIONS = [
   'OTHER',
 ] as const
 
-export type UserHeardFrom = (typeof USER_HEARD_FROM_OPTIONS)[number]
+export type PreRegUserHeardFrom = (typeof PRE_REG_USER_HEARD_FROM_OPTIONS)[number]
 
-const userHeardFromEnum = pgEnum('user_heard_from', USER_HEARD_FROM_OPTIONS)
+const preRegUserHeardFromEnum = pgEnum('pre_reg_user_heard_from', PRE_REG_USER_HEARD_FROM_OPTIONS)
 
-export const users = pgTable('users', {
+export const preRegUsers = pgTable('pre_reg_users', {
   id: serial('id').primaryKey(),
   firstName: text('first_name').notNull(),
   lastName: text('last_name').notNull(),
@@ -36,16 +36,16 @@ export const users = pgTable('users', {
   schoolOfOrigin: text('school_of_origin'),
   whatToExpect: text('what_to_expect').notNull(),
   firstTimer: boolean('first_timer').notNull().default(true),
-  heardFrom: userHeardFromEnum('heard_from').notNull().default('OTHER'),
+  heardFrom: preRegUserHeardFromEnum('heard_from').notNull().default('OTHER'),
   mailSentSuccess: boolean('mail_sent_success').default(false),
   mailSentAt: timestamp('mail_sent_at'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 })
 
-export const userSelectSchema = createSelectSchema(users)
+export const preRegUserSelectSchema = createSelectSchema(preRegUsers)
 
-export const userCommonInsertSchema = Type.Object({
+export const preRegUserCommonInsertSchema = Type.Object({
   firstName: Type.String({
     minLength: 2,
     maxLength: 50,
@@ -77,16 +77,16 @@ export const userCommonInsertSchema = Type.Object({
   }),
   firstTimer: Type.Boolean(),
   heardFrom: Type.Enum(
-    Object.fromEntries(USER_HEARD_FROM_OPTIONS.map((v) => [v, v])),
-    { errorMessage: `Debe ser uno de: ${USER_HEARD_FROM_OPTIONS.join(', ')}` }
+    Object.fromEntries(PRE_REG_USER_HEARD_FROM_OPTIONS.map((v) => [v, v])),
+    { errorMessage: `Debe ser uno de: ${PRE_REG_USER_HEARD_FROM_OPTIONS.join(', ')}` }
   ),
 })
 
-const userFromBuapInsertSchema = Type.Object({
+const preRegUserFromBuapInsertSchema = Type.Object({
   fromBuap: Type.Literal(true),
 })
 
-const userNotFromBuapInsertSchema = Type.Object({
+const preRegUserNotFromBuapInsertSchema = Type.Object({
   fromBuap: Type.Literal(false),
   schoolOfOrigin: Type.String({
     minLength: 2,
@@ -95,12 +95,12 @@ const userNotFromBuapInsertSchema = Type.Object({
   }),
 })
 
-export const userInsertSchema = Type.Union(
+export const preRegUserInsertSchema = Type.Union(
   [
-    Type.Composite([userCommonInsertSchema, userFromBuapInsertSchema], {
+    Type.Composite([preRegUserCommonInsertSchema, preRegUserFromBuapInsertSchema], {
       additionalProperties: false,
     }),
-    Type.Composite([userCommonInsertSchema, userNotFromBuapInsertSchema], {
+    Type.Composite([preRegUserCommonInsertSchema, preRegUserNotFromBuapInsertSchema], {
       additionalProperties: false,
     }),
   ],
@@ -109,9 +109,9 @@ export const userInsertSchema = Type.Union(
   }
 )
 
-export type User = Static<typeof userSelectSchema>
-export type UserInsert = Static<typeof userInsertSchema>
+export type PreRegUser = Static<typeof preRegUserSelectSchema>
+export type PreRegUserInsert = Static<typeof preRegUserInsertSchema>
 
-export const validateUserInsert = new DiscriminatedUnionValidator(
-  userInsertSchema
+export const validatePreRegUserInsert = new DiscriminatedUnionValidator(
+  preRegUserInsertSchema
 )

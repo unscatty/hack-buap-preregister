@@ -13,7 +13,7 @@ import {
   resendMailer,
   sendgridMailer,
 } from '../mailer'
-import { UserInsert, users, validateUserInsert } from '../schema'
+import { PreRegUserInsert, preRegUsers, validatePreRegUserInsert } from '../schema'
 import { formValidationErrors } from '../utils/form-validation-errors'
 
 import * as Sqrl from 'squirrelly'
@@ -40,12 +40,12 @@ export async function handleBuapPreRegister(
 ): Promise<HttpResponseInit> {
   const db = await createDB
 
-  const userData = (await request.json()) as UserInsert
+  const userData = (await request.json()) as PreRegUserInsert
 
-  const isValidUser = validateUserInsert.test(userData)
+  const isValidUser = validatePreRegUserInsert.test(userData)
 
   if (!isValidUser) {
-    const formErrors = formValidationErrors(validateUserInsert.errors(userData))
+    const formErrors = formValidationErrors(validatePreRegUserInsert.errors(userData))
 
     return {
       status: 400,
@@ -57,8 +57,8 @@ export async function handleBuapPreRegister(
     }
   }
 
-  const existingUser = await db.query.users.findFirst({
-    where: eq(users.email, userData.email),
+  const existingUser = await db.query.preRegUsers.findFirst({
+    where: eq(preRegUsers.email, userData.email),
   })
 
   if (existingUser) {
@@ -69,7 +69,7 @@ export async function handleBuapPreRegister(
   }
 
   try {
-    await db.insert(users).values(userData)
+    await db.insert(preRegUsers).values(userData)
   } catch {
     return {
       status: 500,
@@ -95,15 +95,15 @@ export async function handleBuapPreRegister(
     const emailSent = await mailer.send(options)
 
     await db
-      .update(users)
+      .update(preRegUsers)
       .set({ mailSentSuccess: true, mailSentAt: new Date() })
-      .where(eq(users.email, userData.email))
+      .where(eq(preRegUsers.email, userData.email))
   } catch (e) {
     try {
       await db
-        .update(users)
+        .update(preRegUsers)
         .set({ mailSentSuccess: false })
-        .where(eq(users.email, userData.email))
+        .where(eq(preRegUsers.email, userData.email))
     } catch {
       return {
         status: 500,
