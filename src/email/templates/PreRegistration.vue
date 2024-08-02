@@ -5,25 +5,25 @@ const links = [
   {
     name: 'Instagram',
     imgSrc:
-      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/instagram.png?sp=r&st=2024-03-04T06:58:50Z&se=2024-06-01T14:58:50Z&sv=2022-11-02&sr=b&sig=LN%2B3NRr%2BQUfyNnxa3pNCrf8UMyUVjo%2FQC1Mq9RAEJVM%3D',
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/instagram.png?sp=r&st=2024-08-02T03:45:29Z&se=2099-08-02T11:45:29Z&spr=https&sv=2022-11-02&sr=b&sig=73TrHQKXA2m5pDdjbjsa5I97RYlSG2BI4kMtc0MVTJA%3D',
     url: 'https://www.instagram.com/lobohackathon/',
   },
   {
     name: 'TikTok',
     imgSrc:
-      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/tiktok.png?sp=r&st=2024-03-04T06:59:33Z&se=2024-06-01T14:59:33Z&sv=2022-11-02&sr=b&sig=t5R0mOUpcrVQbfSWzwym25KOy9lK%2Fsr6WPZZ0JkJfYo%3D',
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/tiktok.png?sp=r&st=2024-08-02T03:50:29Z&se=2099-08-02T11:50:29Z&spr=https&sv=2022-11-02&sr=b&sig=j%2Fsy0OMUTcjbhVS%2BL5XHIM06Z132UlN5Xe5jhjBupfQ%3D',
     url: 'https://www.tiktok.com/@lobohackathon',
   },
   {
     name: 'Facebook',
     imgSrc:
-      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/facebook.png?sp=r&st=2024-03-04T06:58:21Z&se=2024-06-01T14:58:21Z&sv=2022-11-02&sr=b&sig=ZygW8Yn7gWn9VqOzjf%2BUnA3zMyBy5v8mKsQE3VPKwRY%3D',
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/facebook.png?sp=r&st=2024-08-02T03:44:55Z&se=2099-08-02T11:44:55Z&spr=https&sv=2022-11-02&sr=b&sig=Otzxf6k62RU9EASG8FAWAwnKP0nFWzGIfq1AGRnVIGc%3D',
     url: 'https://www.facebook.com/lobohackathon/',
   },
   {
     name: 'Discord',
     imgSrc:
-      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/discord.png?sp=r&st=2024-03-04T06:56:20Z&se=2024-06-01T14:56:20Z&sv=2022-11-02&sr=b&sig=581tOqb25mn4opYrlGSdRETh6s6xDh7jEEbBDwMNJlU%3D',
+      'https://hackathonbuapbb54.blob.core.windows.net/hack-assets/discord.png?sp=r&st=2024-08-02T03:42:50Z&se=2099-08-02T11:42:50Z&spr=https&sv=2022-11-02&sr=b&sig=CHIID%2Bpllpu3bDo2MkkI80rJLXzUAAFzvPsVLWGEuy8%3D',
     url: 'https://discord.gg/DnFZNU9h',
   },
 ]
@@ -48,7 +48,7 @@ const links = [
               <strong>¡Ya estás dentro!</strong>
             </EText>
             <EImg
-              src="https://hackathonbuapbb54.blob.core.windows.net/hack-assets/lobo_personaje.png?sp=r&st=2024-03-03T22:45:14Z&se=2024-06-01T06:45:14Z&sv=2022-11-02&sr=b&sig=0s4yv3yEzalj5j3wIU9%2FHqM%2FDV09LQbMrGleS8nFqPM%3D"
+              src="https://hackathonbuapbb54.blob.core.windows.net/hack-assets/lobo_personaje.png?sp=r&st=2024-08-02T03:49:10Z&se=2099-08-02T11:49:10Z&spr=https&sv=2022-11-02&sr=b&sig=HPdqxBlibOUnqRyO%2B1%2BJbq9SYl%2FOCqrhLmTFAenpZlw%3D"
               width="640"
               height="360"
               alt="Hackathon banner"
